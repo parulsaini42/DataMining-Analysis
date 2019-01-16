@@ -1,0 +1,33 @@
+import random
+
+n=input()
+words=n.split(" ")
+p=[]
+punctuations='''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+for w in words:
+    s=list(w)
+    p.clear()
+    #remove punctuations
+    for i in s:
+        if i in punctuations:
+            #store punctuations and its index
+            p.append([s.index(i),i])       
+    for j in p:
+        s.remove(j[1])
+    l=len(s)
+    #shuffle keeping first and last character intact
+    if l>=4:
+        mid=s[1:-1]
+        random.shuffle(mid)
+        mid.insert(0,s[0])
+        mid.insert(l-1,s[l-1])
+        #insert punctuations at their positions
+        for j in p:
+            mid.insert(j[0],j[1])
+    else:
+        mid=s[:]
+    
+    makeitastring = ''.join(map(str, mid))
+    print(makeitastring,end =" ")
+    
+    
